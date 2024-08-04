@@ -23,11 +23,6 @@ app.get('/', authenticate, params, async (req, res) => {
         return res.status(500).send('Error fetching the image.');
     }
 
-    if (statusCode >= 300 && headers.location) {
-        req.params.url = headers.location;
-        return redirect(req, res);
-    }
-
     req.params.originType = headers['content-type'] || '';
     req.params.originSize = buffer.byteLength;
 
